@@ -3,6 +3,9 @@ const userControllers = require('../controllers/userControllers')
 const contactController = require('../controllers/contactController')
 const applicationController = require('../controllers/applicationController')
 
+router.get('/', (req, res) => {
+    res.json({ message: 'App Functions Okay' })
+})
 router.post('/', userControllers.register)//register
 router.post('/login', userControllers.login)//login
 router.post('/logout', userControllers.logout)//logout

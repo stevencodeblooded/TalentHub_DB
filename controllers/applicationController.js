@@ -1,7 +1,6 @@
 const multer = require('multer');
 const JobApplication = require('../model/applicationModel');
 
-// Set up multer storage
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/') // Destination folder for storing uploaded files
@@ -11,22 +10,19 @@ const storage = multer.diskStorage({
     }
 });
 
-// Filter for allowed file types
 const fileFilter = function (req, file, cb) {
     if (file.mimetype === 'application/pdf' || file.mimetype === 'application/msword') {
-        cb(null, true); // Accept the file
+        cb(null, true); 
     } else {
         cb(new Error('Invalid file type. Only PDF or Word files are allowed.'), false);
     }
 }
 
-// Set up multer upload
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 const apply = async (req, res) => {
     const { fullname, email, message } = req.body;
 
-    // Check if resume file is included in the request
     if (!req.file) {
         return res.status(400).json({ message: 'Resume file is required.' });
     }
@@ -41,4 +37,4 @@ const apply = async (req, res) => {
     }
 }
 
-module.exports = { apply, upload }; // Export upload middleware if needed in routes
+module.exports = { apply, upload }; 
