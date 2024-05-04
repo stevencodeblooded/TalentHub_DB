@@ -3,7 +3,7 @@ const JobApplication = require('../model/applicationModel');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/') // Destination folder for storing uploaded files
+        cb(null, 'uploads/') 
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + '-' + file.originalname); // Generate unique filenames

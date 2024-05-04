@@ -6,10 +6,11 @@ const applicationController = require('../controllers/applicationController')
 router.get('/', (req, res) => {
     res.json({ message: 'App Functions Okay' })
 })
+
 router.post('/', userControllers.register)//register
 router.post('/login', userControllers.login)//login
 router.post('/logout', userControllers.logout)//logout
 router.post('/contact', contactController.contact)//contact
-router.post('/application', applicationController.apply) //job application
+router.post('/application', applicationController.upload.single('resume'), applicationController.apply) //job application
 
 module.exports = router
