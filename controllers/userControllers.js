@@ -49,8 +49,39 @@ const login = async (req, res) => {
     
 }
 
+
 const logout = (req, res) => {
     res.json({ message: 'LOGOUT'})
 }
 
-module.exports = { register, login, logout }
+
+const updateUser = async (req, res) => {
+    // console.log('Hello User update here')
+    // const userId = req.params.id
+    // if (req.user.id !== userId) {
+    //     res.status(401).json({ message: 'You can only update your own account' })
+    // }
+
+    // const { name, email, password } = req.body
+
+    // let updatedUserData = {
+    //     name,
+    //     email,
+    // }
+
+    // if (password) {
+    //     const hashedPassword = await bcryptjs.hash(password, 12)
+    //     updatedUserData.password = hashedPassword
+    // }
+
+    // let newUser
+    // try {
+    //     newUser = await User.findByIdAndUpdate(userId, updatedUserData, { new: true })
+    // } catch (error) {
+    //     res.status(401).json({ message: 'Update Failed! Could not find user with the specified id'})
+    // }
+
+    // res.status(200).json({ message: 'User has been updated successfully', newUser })
+}
+
+module.exports = { register, login, logout, updateUser }
