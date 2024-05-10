@@ -50,38 +50,32 @@ const login = async (req, res) => {
 }
 
 
-const logout = (req, res) => {
-    res.json({ message: 'LOGOUT'})
-}
-
-
 const updateUser = async (req, res) => {
-    // console.log('Hello User update here')
-    // const userId = req.params.id
+    const userId = req.params.id
     // if (req.user.id !== userId) {
-    //     res.status(401).json({ message: 'You can only update your own account' })
-    // }
+    if (!userId) {
+        res.status(401).json({ message: 'You cannot update this account' })
+    }
 
-    // const { name, email, password } = req.body
+    const { name, email, password } = req.body
 
-    // let updatedUserData = {
-    //     name,
-    //     email,
-    // }
+    let updatedUserData = {
+        name,
+        email,
+    }
 
-    // if (password) {
-    //     const hashedPassword = await bcryptjs.hash(password, 12)
-    //     updatedUserData.password = hashedPassword
-    // }
+    if (password) {
+        const hashedPassword = await bcryptjs.hash(password, 12)
+        updatedUserData.password = hashedPassword
+    }
 
-    // let newUser
-    // try {
-    //     newUser = await User.findByIdAndUpdate(userId, updatedUserData, { new: true })
-    // } catch (error) {
-    //     res.status(401).json({ message: 'Update Failed! Could not find user with the specified id'})
-    // }
-
-    // res.status(200).json({ message: 'User has been updated successfully', newUser })
+    let newUser
+    try {
+        newUser = await User.findByIdAndUpdate(userId, updatedUserData, { new: true })
+        return res.status(200).json({ message: 'User has been updated successfully', newUser })
+    } catch (error) {
+        return res.status(401).json({ message: 'Update Failed! Could not find user with the specified id'})
+    }
 }
 
-module.exports = { register, login, logout, updateUser }
+module.exports = { register, login, updateUser }

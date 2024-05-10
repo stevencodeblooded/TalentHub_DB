@@ -10,12 +10,11 @@ router.get('/', (req, res) => {
 
 router.post('/', userControllers.register)//register
 router.post('/login', userControllers.login)//login
-router.post('/logout', userControllers.logout)//logout
+router.put('/:id', userControllers.updateUser) //update user
 router.post('/contact', contactController.contact)//contact
 router.post('/jd', jobDescriptionController.jds) //upload job desc
 router.get('/jds', jobDescriptionController.getAlljobs) //get all jobs
 router.get('/description/:id', jobDescriptionController.jobDesc) //get single job
 router.post('/application', applicationController.upload.single('resume'), applicationController.apply) //job application
-router.put('/:id', userControllers.updateUser) 
 
 module.exports = router
